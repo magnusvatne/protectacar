@@ -1,0 +1,8 @@
+package piCode;
+
+public class SafeDistance {
+
+	private int distance; //type not decided
+	
+
+}
