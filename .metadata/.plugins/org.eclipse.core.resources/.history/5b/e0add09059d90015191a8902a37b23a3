@@ -1,0 +1,10 @@
+package piCode;
+
+
+public class ComfZone {
+	
+	public void checkZone(){
+		
+	}
+
+}
