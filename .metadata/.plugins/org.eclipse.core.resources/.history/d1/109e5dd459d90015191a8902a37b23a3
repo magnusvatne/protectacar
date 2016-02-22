@@ -1,0 +1,7 @@
+package piCode;
+
+public class AutoBeam {
+	private void switchTreshold(){
+		
+	}
+}
