@@ -5,14 +5,19 @@ import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
+//import java.util.EventListener;
 
 public class AutoBeam {
+	boolean on;
 	boolean lightSwitch = false;
 	
 	public AutoBeam(double sensorData){
 		boolean threshold = checkThreshold(sensorData);
-		if (threshold){
-			switchBeam();
+		while (on==true){
+			if (threshold){
+				switchBeam();
+			}
+			continue;
 		}
 	}
 
@@ -25,6 +30,7 @@ public class AutoBeam {
 		}
 		else{
 			lightSwitch = false;
+			pin.toggle();
 		}
 	}
 	
@@ -45,4 +51,6 @@ public static void main (String args[]){
 
     // set shutdown state for this pin
     pin.setShutdownOptions(true, PinState.LOW);
+    
+   
 }
