@@ -1,9 +1,12 @@
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 from collections import deque
-#GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)
 
 beam = None
+lys = 19
+
+GPIO.setup(lys, GPIO.OUT)
 
 def switchBeam(action):
 	global beam
@@ -11,9 +14,11 @@ def switchBeam(action):
 		print"Lightstate is already correct"
 	elif (beam == False): #This is the method that turns on the highBeam
 		beam = True
+		GPIO.out(lys, True)
 		#Call the method made by Bortne that turns on the lights through RPI
 		print('Lights turned on')
 	else:
+		GPIO.out(lys, False)
 		#Call the method made by Bortne that turns off the lights through RPI
 		print('Lights turned off')
 		beam = False
