@@ -46,7 +46,7 @@ def safeDistance():
 	distance = round(statistics.median(avstand),2)
 
 	#print (distance, avstand1)
-	print("Avstand til kjøretøy foran: ",distance)
+	return distance
 
 
 def main():

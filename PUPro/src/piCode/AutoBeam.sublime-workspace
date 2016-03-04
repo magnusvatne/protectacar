@@ -1,0 +1,284 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"True",
+				"True"
+			],
+			[
+				"trea",
+				"treatedValue"
+			],
+			[
+				"tre",
+				"treatedValue"
+			],
+			[
+				"s",
+				"switchBeam"
+			],
+			[
+				"light",
+				"lightState"
+			],
+			[
+				"threshold",
+				"threshold"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/C/Users/Christian/OneDrive/Universitet/4. semester/Programvareutvikling/Github/protectacar/PU_features/autoBeam.py",
+			"settings":
+			{
+				"buffer_size": 1693,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "AutoBeam.java",
+			"settings":
+			{
+				"buffer_size": 2103,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Christian/OneDrive/Universitet/4. semester/Programvareutvikling/Github/protectacar/PUPro/src/piCode/AutoBeam.java",
+		"/C/Users/Christian/OneDrive/Universitet/4. semester/Kommunikasjon Tjenester og Nett/Github/KTN/Client/Client.py",
+		"/C/Users/Christian/OneDrive/Universitet/4. semester/Kommunikasjon Tjenester og Nett/Github/KTN/Server/moServer.py",
+		"/C/Users/Christian/OneDrive/Universitet/4. semester/Kommunikasjon Tjenester og Nett/Github/KTN/Client/MessageReceiver.py",
+		"/C/Users/Christian/OneDrive/Universitet/4. semester/Kommunikasjon Tjenester og Nett/Github/KTN/Client/MessageParser.py",
+		"/C/Users/Christian/OneDrive/Universitet/4. semester/Kommunikasjon Tjenester og Nett/Prosjektoppgave/Skeleton/Client/Client.py",
+		"/C/Users/Christian/OneDrive/Universitet/4. semester/Kommunikasjon Tjenester og Nett/Prosjektoppgave/Skeleton/Client/MessageReceiver.py",
+		"/C/Users/Christian/OneDrive/Universitet/4. semester/Kommunikasjon Tjenester og Nett/Prosjektoppgave/Skeleton/Server/Server.py",
+		"/C/Users/Christian/OneDrive/Universitet/4. semester/Kommunikasjon Tjenester og Nett/Prosjektoppgave/Skeleton/Client/MessageParser.py"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"daemon"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/Christian/OneDrive/Universitet/4. semester/Programvareutvikling/Github/protectacar/PU_features/autoBeam.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1693,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								36,
+								36
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "AutoBeam.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2103,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								444,
+								444
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 405.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.680087847731,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "AutoBeam.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

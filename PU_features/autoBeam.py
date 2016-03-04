@@ -40,6 +40,9 @@ def treatOutput(cameraOutput):
 	return x
 
 def main(cameraOutput, threshold, lightState):
+	#We need to figure out how we want to handle time-delay.
+	#It might be a better idea to not have a timed delay here of calling the class,
+	#as we won't get updates from this program (camera-updates)
 	global beam 
 	beam = lightState
 	x = 0
