@@ -1,5 +1,5 @@
 import time
-from SafeDistance.py import safeDistance()
+from safeDistanceSensors.py import safeDistance
 
 overtakeDistance = 800.0
 
@@ -13,5 +13,6 @@ def checkOvertake(safeDistance):
 		return 0
 
 def main():
+	checkOvertake(safeDistance)
 
 main()
