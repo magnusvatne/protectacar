@@ -11,6 +11,7 @@ walkeMeHomeLight = True
 class Main():
 
 	def drive():
+		pass
 		#Regular drive-state.
 		#Run while-loop monitoring speed and distances to cars ahead
 		#Keep updated with external methods monitoring safeDistance() + overtake()
@@ -24,6 +25,8 @@ class Main():
 		#Return False if speed > 10 indicating driver will continue driving
 		while currentGear == "reverse":
 			ComfZone.checkZone()
+		if currentGear != "reverse":
+			currentGear = 0
 
 	def stop():
 		timeOn = 60 #maybe add a handler for manual change of time-delay for highbeams?
