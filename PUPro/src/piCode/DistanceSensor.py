@@ -44,140 +44,155 @@ print ("Done setting up, lets go!")
 def bak_venstre():
 	i = 1
 	distance = 1
-	while(i <= 3):
-		#time.sleep()
-		GPIO.output(TRIG_BAK_VENSTRE, True)
-		time.sleep(0.00001)
-		GPIO.output(TRIG_BAK_VENSTRE, False)
-			
-		timeoutTime = time.time()
-		while GPIO.input(ECHO_BAK_VENSTRE) == 0:
-			pulse_start = time.time()
-			if pulse_start - timeoutTime > 3:
-				break	
-
-		timeoutTime = time.time()
-		while GPIO.input(ECHO_BAK_VENSTRE) == 1:
-			pulse_end = time.time()
-			if pulse_end - timeoutTime > 3:
-				break
-
-		duration = pulse_end - pulse_start
-		distance = duration * 17150
-		distance = round(distance,2)
+	try: 
+		while(i <= 3):
+			#time.sleep()
+			GPIO.output(TRIG_BAK_VENSTRE, True)
+			time.sleep(0.00001)
+			GPIO.output(TRIG_BAK_VENSTRE, False)
+				
+			timeoutTime = time.time()
+			while GPIO.input(ECHO_BAK_VENSTRE) == 0:
+				pulse_start = time.time()
+				if pulse_start - timeoutTime > 3:
+					break	
 	
-		avstand1.append(distance)
-		if len(avstand1) >= 10:
-			avstand1.popleft()
-		distance = round(statistics.median(avstand1),2)
-
-		#print (distance, avstand1)
-		i += 1
-	return distance
-
+			timeoutTime = time.time()
+			while GPIO.input(ECHO_BAK_VENSTRE) == 1:
+				pulse_end = time.time()
+				if pulse_end - timeoutTime > 3:
+					break
+	
+			duration = pulse_end - pulse_start
+			distance = duration * 17150
+			distance = round(distance,2)
+		
+			avstand1.append(distance)
+			if len(avstand1) >= 10:
+				avstand1.popleft()
+			distance = round(statistics.median(avstand1),2)
+	
+			#print (distance, avstand1)
+			i += 1
+		return distance
+	except:
+		print("Sensor bak venstre er ødelagt")
+		return -1
 
 def framme_venstre():
 	i = 1
 	distance = 1
-	while(i <= 3):
-                #time.sleep()
-		GPIO.output(TRIG_FRAMME_VENSTRE, True)
-		time.sleep(0.00001)
-		GPIO.output(TRIG_FRAMME_VENSTRE, False)
-		
-		timeoutTime = time.time()
-		while GPIO.input(ECHO_FRAMME_VENSTRE) == 0:
-			pulse_start = time.time()
-			if pulse_start - timeoutTime > 3:
-				break
-		
-		timeoutTime = time.time()
-		while GPIO.input(ECHO_FRAMME_VENSTRE) == 1:
-			pulse_end = time.time()
-			if pulse_end - timeoutTime > 3:
-				break
-
-
-		duration = pulse_end - pulse_start
-		distance = duration * 17150
-		distance = round(distance,2)
-
-		avstand2.append(distance)
-		if len(avstand2) >= 10:
-			avstand2.popleft()
-		distance = round(statistics.median(avstand2),2)
-
-                #print (distance, avstand1)
-		i += 1
-	return distance
+	try:
+		while(i <= 3):
+	                #time.sleep()
+			GPIO.output(TRIG_FRAMME_VENSTRE, True)
+			time.sleep(0.00001)
+			GPIO.output(TRIG_FRAMME_VENSTRE, False)
+			
+			timeoutTime = time.time()
+			while GPIO.input(ECHO_FRAMME_VENSTRE) == 0:
+				pulse_start = time.time()
+				if pulse_start - timeoutTime > 3:
+					break
+			
+			timeoutTime = time.time()
+			while GPIO.input(ECHO_FRAMME_VENSTRE) == 1:
+				pulse_end = time.time()
+				if pulse_end - timeoutTime > 3:
+					break
+	
+	
+			duration = pulse_end - pulse_start
+			distance = duration * 17150
+			distance = round(distance,2)
+	
+			avstand2.append(distance)
+			if len(avstand2) >= 10:
+				avstand2.popleft()
+			distance = round(statistics.median(avstand2),2)
+	
+	                #print (distance, avstand1)
+			i += 1
+		return distance
+	except:
+		print("Sensor framme venstre er ødelagt")
+		return -1
 
 
 def bak_hogre():
 	i = 1
 	distance = 0
-	while(i <= 3):
-		GPIO.output(TRIG_BAK_HOGRE, True)
-		time.sleep(0.00001)
-		GPIO.output(TRIG_BAK_HOGRE, False)
-
-		timeoutTime = time.time()
-		while GPIO.input(ECHO_BAK_HOGRE) == 0:
-			pulse_start = time.time()
-			if pulse_start - timeoutTime > 3:
-				break
-
-		while GPIO.input(ECHO_BAK_HOGRE) == 1:
-			pulse_end = time.time()
-			if pulse_end - timeoutTime > 3:
-				break
-
-
-		duration = pulse_end - pulse_start
-		distance = duration * 17150
-		distance = round(distance,2)
-
-		avstand3.append(distance)
-		if len(avstand3) >= 10:
-			avstand3.popleft()
-		distance = round(statistics.median(avstand3),2)
-
-                #print (distance, avstand1)
-		i += 1
-	return distance
+	try:
+		while(i <= 3):
+			GPIO.output(TRIG_BAK_HOGRE, True)
+			time.sleep(0.00001)
+			GPIO.output(TRIG_BAK_HOGRE, False)
+	
+			timeoutTime = time.time()
+			while GPIO.input(ECHO_BAK_HOGRE) == 0:
+				pulse_start = time.time()
+				if pulse_start - timeoutTime > 3:
+					break
+	
+			while GPIO.input(ECHO_BAK_HOGRE) == 1:
+				pulse_end = time.time()
+				if pulse_end - timeoutTime > 3:
+					break
+	
+	
+			duration = pulse_end - pulse_start
+			distance = duration * 17150
+			distance = round(distance,2)
+	
+			avstand3.append(distance)
+			if len(avstand3) >= 10:
+				avstand3.popleft()
+			distance = round(statistics.median(avstand3),2)
+	
+	                #print (distance, avstand1)
+			i += 1
+		return distance
+	except:
+		print("Sensor bak høgre er ødelagt")
+		return -1
 
 
 def framme_hogre():
 	i = 1
 	distance = 0
-	while(i <= 3):
-		GPIO.output(TRIG_FRAMME_HOGRE, True)
-		time.sleep(0.00001)
-		GPIO.output(TRIG_FRAMME_HOGRE, False)
-		
-		timeoutTime = time.time()
-		while GPIO.input(ECHO_FRAMME_HOGRE) == 0:
-			pulse_start = time.time()
-			if pulse_start - timeoutTime > 3:
-				break
-		
-		timeoutTime = time.time()
-		while GPIO.input(ECHO_FRAMME_HOGRE) == 1:
-			pulse_end = time.time()
-			if pulse_end - timeoutTime > 3:
-				break
-
-		duration = pulse_end - pulse_start
-		distance = duration * 17150
-		distance = round(distance,2)
-
-		avstand4.append(distance)
-		if len(avstand4) >= 10:
-			avstand4.popleft()
-		distance = round(statistics.median(avstand4),2)
-
-                #print (distance, avstand1)
-		i += 1
-	return distance
+	try:
+		while(i <= 3):
+			GPIO.output(TRIG_FRAMME_HOGRE, True)
+			time.sleep(0.00001)
+			GPIO.output(TRIG_FRAMME_HOGRE, False)
+			
+			timeoutTime = time.time()
+			while GPIO.input(ECHO_FRAMME_HOGRE) == 0:
+				pulse_start = time.time()
+				if pulse_start - timeoutTime > 3:
+					break
+			
+			timeoutTime = time.time()
+			while GPIO.input(ECHO_FRAMME_HOGRE) == 1:
+				pulse_end = time.time()
+				if pulse_end - timeoutTime > 3:
+					break
+	
+			duration = pulse_end - pulse_start
+			distance = duration * 17150
+			distance = round(distance,2)
+	
+			avstand4.append(distance)
+			if len(avstand4) >= 10:
+				avstand4.popleft()
+			distance = round(statistics.median(avstand4),2)
+	
+	                #print (distance, avstand1)
+			i += 1
+		return distance
+	except:
+		print("Sensor framme høgre er ødelagt")
+		return -1
 
 
 
