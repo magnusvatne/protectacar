@@ -27,6 +27,7 @@ class Main():
 
 	def stop():
 		timeOn = 60 #maybe add a handler for manual change of time-delay for highbeams?
+		global walkeMeHomeLight
 		if walkMeHome(timeOn, walkMeHomeLight) == 0:
 			walkMeHomeLight = False
 			return 0
