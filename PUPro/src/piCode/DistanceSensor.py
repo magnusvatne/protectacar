@@ -1,4 +1,3 @@
-
 import RPi.GPIO as GPIO
 import time
 from collections import deque
@@ -74,7 +73,7 @@ def bak_venstre():
 
 		#print (distance, avstand1)
 		i += 1
-	print("Bak venstre",distance)
+	return distance
 
 
 def framme_venstre():
@@ -110,7 +109,7 @@ def framme_venstre():
 
                 #print (distance, avstand1)
 		i += 1
-	print("Framme venstre",distance)
+	return distance
 
 
 def bak_hogre():
@@ -144,7 +143,7 @@ def bak_hogre():
 
                 #print (distance, avstand1)
 		i += 1
-	print("Bak hogre", distance)
+	return distance
 
 
 def framme_hogre():
@@ -178,18 +177,17 @@ def framme_hogre():
 
                 #print (distance, avstand1)
 		i += 1
-	print("Framme hogre", distance)
-
+	return distance
 
 
 
 def main():
 	while(True):
 		time.sleep(1)
-		bak_venstre()
-		framme_venstre()
-		bak_hogre()
-		framme_hogre()
+		print(bak_venstre())
+		print(framme_venstre())
+		print(bak_hogre())
+		print(framme_hogre())
 		print("")
 		print("-----------------")
 		print("")
