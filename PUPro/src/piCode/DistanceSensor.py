@@ -8,12 +8,14 @@ TRIG_BAK_VENSTRE	 = 4
 TRIG_BAK_HOGRE		 = 20
 TRIG_FRAMME_VENSTRE	 = 16
 TRIG_FRAMME_HOGRE	 = 26
+TRIG_FRAMOVER		 = 5
 
 
 ECHO_BAK_VENSTRE	 = 27 #Connect ECHO to Pin 18 on the Raspberry Pi
 ECHO_BAK_HOGRE		 = 22 #Connect ECHO to Pin 40 on the Raspberry Pi
 ECHO_FRAMME_VENSTRE	 = 23 #Connect ECHO to Pin 37 on the Raspberry Pi
 ECHO_FRAMME_HOGRE	 = 24 #Connect ECHO to Pin 15 on the Raspberry Pi
+ECHO_FRAMOVER		 = 6
 
 
 print ("Distance Measurement In Progress")
@@ -22,22 +24,26 @@ GPIO.setup(TRIG_BAK_VENSTRE, GPIO.OUT)
 GPIO.setup(TRIG_BAK_HOGRE, GPIO.OUT)
 GPIO.setup(TRIG_FRAMME_VENSTRE, GPIO.OUT)
 GPIO.setup(TRIG_FRAMME_HOGRE, GPIO.OUT)
+GPIO.setup(TRIG_FRAMOVER, GPIO.OUT)
 
 
 GPIO.setup(ECHO_BAK_VENSTRE,GPIO.IN)
 GPIO.setup(ECHO_BAK_HOGRE,GPIO.IN)
 GPIO.setup(ECHO_FRAMME_VENSTRE,GPIO.IN)
 GPIO.setup(ECHO_FRAMME_HOGRE,GPIO.IN)
+GPIO.setup(ECHO_FRAMOVER, GPIO.IN)
 
 GPIO.output(TRIG_BAK_VENSTRE, False)
 GPIO.output(TRIG_BAK_HOGRE, False)
 GPIO.output(TRIG_FRAMME_VENSTRE, False)
 GPIO.output(TRIG_FRAMME_HOGRE, False)
+GPIO.output(TRIG_FRAMOVER, False)
 
 avstand1 = deque()
 avstand2 = deque()
 avstand3 = deque()
 avstand4 = deque()
+avstand5 = deque()
 
 print ("Done setting up, lets go!")
 
@@ -121,7 +127,7 @@ def framme_venstre():
 
 def bak_hogre():
 	i = 1
-	distance = 0
+	distance = 1
 	try:
 		while(i <= 3):
 			GPIO.output(TRIG_BAK_HOGRE, True)
@@ -159,7 +165,7 @@ def bak_hogre():
 
 def framme_hogre():
 	i = 1
-	distance = 0
+	distance = 1
 	try:
 		while(i <= 3):
 			GPIO.output(TRIG_FRAMME_HOGRE, True)
@@ -194,7 +200,41 @@ def framme_hogre():
 		print("Sensor framme høgre er ødelagt")
 		return -1
 
-
+def safeDistance():
+	i = 1
+	distance = 1
+	try:
+		while(True):
+			GPIO.output(TRIG_FRAMOVER, True)
+			time.sleep(0.00001)
+			GPIO.output(TRIG_FRAMOVER, False)
+					
+			timeoutTime = time.time()
+			while GPIO.input(ECHO_FRAMOVER) == 0:
+				pulse_start = time.time()
+				if pulse_start - timeoutTime > 3:
+					break	
+		
+			timeoutTime = time.time()
+			while GPIO.input(ECHO_FRAMOVER) == 1:
+				pulse_end = time.time()
+				if pulse_end - timeoutTime > 3:
+					break
+		
+			duration = pulse_end - pulse_start
+			distance = duration * 17150
+			distance = round(distance,2)
+			
+			avstand5.append(distance)
+			if len(avstand5) >= 20:
+				avstand5.popleft()
+			distance = round(statistics.median(avstand5),2)
+		
+			#print (distance, avstand1)
+			return distance
+	except:
+		print("Sensor framover er ødelagt")
+		return -1
 
 def main():
 	while(True):
