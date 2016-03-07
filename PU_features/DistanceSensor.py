@@ -243,6 +243,7 @@ def main():
 		print(framme_venstre())
 		print(bak_hogre())
 		print(framme_hogre())
+		print(safeDistance())
 		print("")
 		print("-----------------")
 		print("")
