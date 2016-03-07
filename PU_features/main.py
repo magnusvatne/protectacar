@@ -1,5 +1,7 @@
 #Have a global variable for the walkMeHome-lights. Boolean
 #If its True, let there be light. If False: no light
+import time
+walkeMeHomeLight = True
 
 def drive():
 	#Regular drive-state.
@@ -15,10 +17,19 @@ def park():
 	#Return False if speed > 10 indicating driver will continue driving
 
 def stop():
+	timeOn = 60
+	walkMeHome(timeOn, walkMeHomeLight)
 	#run walkMeHome-method
+	#get input from a button to determine walkeMeHomeLight's state
+	#if RPIO_light_switch == True:
+		#walkMeHomeLight = True
+	#else:
+		#walkMeHomeLight = False	
 	#turn on high-beams if global variable is True.
 	#Keep them on for a set time, i.e 60 seconds, return 0
 	#If False, return 0
+
+
 
 def main():
 	#controller with a controlVariable set to 1 for online-status
@@ -28,8 +39,9 @@ def main():
 	#else call the stop method and terminate loop.
 
 	#To finish off, print a goodbye-prompt.
+
 	controll = 1
 	while controll == 1:
-		
+
 
 main()
