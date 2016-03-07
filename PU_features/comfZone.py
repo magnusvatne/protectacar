@@ -1,6 +1,7 @@
 import sensorAccess
+import Main
 
-class ComfZone:
+class ComfZone():
     sensorDataLeft = sensorAccess.get() #placeholder function, should get data
     sensorDataRight = sensorAccess.get()
     isOn = false #whether ComfZone is turned on by user
