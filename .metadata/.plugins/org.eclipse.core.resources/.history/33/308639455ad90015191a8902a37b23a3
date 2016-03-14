@@ -1,6 +1,0 @@
-package piCode;
-
-public class Overtake {
-	
-	private double overtakeDistance;
-}
