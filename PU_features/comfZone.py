@@ -6,27 +6,49 @@ class ComfZone():
     #sensorDataRight = sensorAccess.get()
     #/Deprecated
 
+
+    #PLACEHOLDER VALUES, should be pin for output diode
+    bak_venstre_pin = 1
+    framme_venstre_pin = 1
+    bak_hogre_pin = 1
+    framme_hogre_pin = 1
+
+
     isOn = False #whether ComfZone is turned on by user
     leftPin,rightPin #for giving feedback on whether a car is in your blindzone
 
-    safeDistance = 8#final num to compare with distance from sensor
+    safeDistance = 8 #final num to compare with distance from sensor
 
     def checkZone(): #runs in background, will check zones when isOn = true
         while (isOn):
-            sensorDataLeft = DistanceSensor.bak_hogre()
-            sensorDataRight = DistanceSensor.bak_venstre()
+            sensorDataRearLeft = DistanceSensor.bak_hogre()
+            sensorDataRearRight = DistanceSensor.bak_venstre()
+            sensorDataFrontRight = DistanceSensor.framme_hogre()
+            sensorDataFrontLeft = DistanceSensor.framme_venstre()
 
-            #Must implement pin control, unfinished as is
-            if (check(sensorDataLeft)):
-                leftPin.toggleOn 
+            if (sensorDataRearLeft < 0 or sensorDataRearRight < 0 or
+                sensorDataFrontLeft < 0 or sensorDataFrontRight < 0):
+                #do stuff for broken sensor(s)
+
+            if (check(sensorDataRearLeft)):
+                DistanceSensor.GPIO.output(bak_venstre_pin, true)
             else:
-                leftPin.toggleOff
+                DistanceSensor.GPIO.output(bak_venstre_pin, false)
 
-            if (check(sensorDataRight)):
-                rightPin.toggleOn
+            if (check(sensorDataRearRight)):
+                DistanceSensor.GPIO.output(bak_hogre_pin, true)
             else:
-                rightPin.toggleOff
+                DistanceSensor.GPIO.output(bak_hogre_pin, false)
 
+            if (check(sensorDataFrontLeft)):
+                DistanceSensor.GPIO.output(bak_venstre_pin, true)
+            else:
+                DistanceSensor.GPIO.output(bak_venstre_pin, false)
+
+            if (check(sensorDataFrontLeft)):
+                DistanceSensor.GPIO.output(bak_venstre_pin, true)
+            else:
+                DistanceSensor.GPIO.output(bak_venstre_pin, false)
 
     def check(sensorData):
         if (sensorData < safeDistance):
