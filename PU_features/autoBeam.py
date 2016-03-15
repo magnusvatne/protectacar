@@ -46,7 +46,7 @@ class AutoBeam():
 		x -= 1
 		return x
 
-def main(cameraOutput, threshold, lightState):
+def autoMain(cameraOutput, threshold, lightState):
 	#We need to figure out how we want to handle time-delay.
 	#It might be a better idea to not have a timed delay here of calling the class,
 	#as we won't get updates from this program (camera-updates)
@@ -61,9 +61,9 @@ def main(cameraOutput, threshold, lightState):
 		x += 1
 
 #Test to see if program works
-main(8.393, 2.30, True)
-main(6.7, 2.30, True)
-main(5.2, 2.30, False)
-main(0.1, 2.30, False)
-main(2.6, 2.30, True)
-main(3.0, 2.30, False)
+autoMain(8.393, 2.30, True)
+autoMain(6.7, 2.30, True)
+autoMain(5.2, 2.30, False)
+autoMain(0.1, 2.30, False)
+autoMain(2.6, 2.30, True)
+autoMain(3.0, 2.30, False)

@@ -1,21 +1,33 @@
 #Have a global variable for the walkMeHome-lights. Boolean
 #If its True, let there be light. If False: no light
 import time
+import sys
 #import comfZone.py
 from walkMeHome import walkMeHome
-#import autoBeam.py
+from autobeam import autoMain
 #import overtake.py
 #import safeDistance.py
 from speedMonitor import changeCurrentSpeed
+from speedMonitor import deccellerator
 
 
 #class Main():
 
 def drive(currentSpeed):
-	while (currentSpeed > 10):
+	#while (currentSpeed > 10):
+	for maintain in range(0,10):
 		currentSpeed = changeCurrentSpeed(currentSpeed)
-		print('The current speed is: ', currentSpeed)
-		time.sleep(0.5)
+		print('Maintaining: The current speed is: ', currentSpeed)
+		time.sleep(0.2)
+	for deccelerate in range(0,10):
+		currentSpeed = deccellerator(currentSpeed)
+		if currentSpeed == 1:
+			currentSpeed == 0
+			break
+		print('Deccelerating: The current speed is: ', currentSpeed)
+		time.sleep(0.2)
+	print('Deccelerating: The current speed is: ', currentSpeed)
+
 #Regular drive-state.
 #Run while-loop monitoring speed and distances to cars ahead
 #Keep updated with external methods monitoring safeDistance() + overtake()
@@ -32,12 +44,37 @@ def park():
 	if currentGear != "reverse":
 		currentGear = 0
 
-def stop(walkMeHomeLight):
-	timeOn = 60 #maybe add a handler for manual change of time-delay for highbeams?
-	if walkMeHome(timeOn, walkMeHomeLight) == 0:
-		walkMeHomeLight = False
-		return 0
-	return -1
+def stop():
+	#This method is called when driver has stopped.
+	#It asks for user input to determine if user wants the walkMeHome-function,
+	#and if so, how long it will be on
+	default = 'yes'
+	valid = {"yes": True, "y": True, "ye": True,
+             "no": False, "n": False}
+
+	print 'Car stopped, calling walkMeHome-function'
+	if default is None:
+		prompt = " [y/n] "
+	elif default == "yes":
+		prompt = " [Y/n] "
+	elif default == "no":
+		prompt = " [y/N] "
+	else:
+		raise ValueError("invalid default answer: '%s'" % default)
+
+	while True:        
+		sys.stdout.write('Would you like to keep highbeams on? ' + prompt)
+		choice = raw_input().lower()
+		if default is not None and choice == '':
+			return valid[default]
+		elif choice in valid:
+			return valid[choice]
+		else:
+			sys.stdout.write("Please respond with 'yes' or 'no' "
+			"(or 'y' or 'n').\n")
+		if valid:
+			print 'How long would you like the lights on(answer in seconds)? '
+			walkMeHome(timeOn)
 #run walkMeHome-method
 #get input from a button to determine walkeMeHomeLight's state
 #if RPIO_light_switch == True:
@@ -60,11 +97,7 @@ def main():
 
 	#To finish off, print a goodbye-prompt.
 
-	#Instansiates the needed programs
-	#comfzone = comfZone.ComfZone()
-	#autobeam = autoBeam.AutoBeam()
-	#over_take = overtake.Overtake()
-	#safedistance = safeDistance.SafeDistance()
+	#Instansiates the needed variables and programs
 	walkMeHomeLight = True
 	currentSpeed = 0
 	controll = 1
@@ -73,22 +106,22 @@ def main():
 	#while controll == 1:
 	#	currentGear = "reverse" #Listens to active changes in gear.
 
-	#Speeds from 0 to 50. This is a stupid function, but we don't have OBD-II
-	for i in range (0,20):
+	#Speeds from 0 to 50. This is a stupid function, but we don't have OBD-II availability
+	for accelerate in range (0,20):
 	    currentSpeed += 2.5
-		#time.sleep(0.2)
+	    print('The current speed is: ', currentSpeed)
+	    time.sleep(0.2)
 
 	#Listens for active changes in speed, changes to drive-state if speed exceeds 10
 	if currentSpeed > 10:
 		drive(currentSpeed)
-	elif gear == "reverse": #Reacts only if gear is reverse
+	#elif gear == "reverse": WE MIGHT HAVE TO DROP THIS, no OBD-II #Reacts only if gear is reverse
+	else:	
+		print 'Parking-mode'
 		park()
-	else:
-		stop() #Calls the stop-method. Shall we have a parameter with a timeOn delay?
+	stop() #Calls the stop-method. Shall we have a parameter with a timeOn delay?
 
 	#This condition checks if the car has stopped. If it has, run the stop-method for walkMeHome
-	if stop(walkMeHomeLight) == 0:
-		controll = 0
 
 
 

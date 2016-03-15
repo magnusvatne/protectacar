@@ -1,13 +1,11 @@
 import time
+from autobeam import switchBeam
 
-
-def walkMeHome(timeOn, walkMeHomeLight):
-   #set highbeams on for timeOn-delay
-
-   if walkMeHomeLight == 0:
-       return 0
-   else:
-       #run method for turning on autobeam
-       time.sleep(timeOn)
-       #run mehod for turning off autobeam
-       return 1
+def walkMeHome(timeOn):
+  #set highbeams on for timeOn-delay
+      #run method for turning on autobeam
+      switchBeam(True)
+      #Wait the given amount of time
+      time.sleep(timeOn)
+      #run mehod for turning off autobeam
+      switchBeam(False)
