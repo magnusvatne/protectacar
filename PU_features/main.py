@@ -9,17 +9,24 @@ from autobeam import autoMain
 #import safeDistance.py
 from speedMonitor import changeCurrentSpeed
 from speedMonitor import deccellerator
+from speedMonitor import getGear
+from overtake import checkOvertake
+from safeDistance import okDistance
 
-
-#class Main():
 
 def drive(currentSpeed):
-	#while (currentSpeed > 10):
+#Regular drive-state.
+#Running for-loop monitoring speed and distances to cars ahead
+#Keep updated with external methods monitoring safeDistance() + overtake()
+#Hard-coded deccelerating lets car change state
 	for maintain in range(0,10):
+		checkOvertake()
 		currentSpeed = changeCurrentSpeed(currentSpeed)
 		print('Maintaining: The current speed is: ', currentSpeed)
 		time.sleep(0.2)
 	for deccelerate in range(0,10):
+		if not okDistance:
+			print 'Slow down asshole!'
 		currentSpeed = deccellerator(currentSpeed)
 		if currentSpeed == 1:
 			currentSpeed == 0
@@ -28,21 +35,19 @@ def drive(currentSpeed):
 		time.sleep(0.2)
 	print('Deccelerating: The current speed is: ', currentSpeed)
 
-#Regular drive-state.
-#Run while-loop monitoring speed and distances to cars ahead
-#Keep updated with external methods monitoring safeDistance() + overtake()
-#Terminate loop if gear is put in reverse. Might need more specifications
 
 def park():
 #Parking-mode
-#While loop: Start sensors that help with parking
-#stop sensors when parking brake is activated.
+#While loop that runs while speed is less than 5 or if gear is in reverse.
 #return True, indicating that park is done.
 #Return False if speed > 10 indicating driver will continue driving
-	while (currentGear == "reverse" and currentSpeed < 10):
+	while (currentGear == "reverse" or currentSpeed < 5):
+		currentSpeed = changeCurrentSpeed(currentSpeed)
+		currentGear = getGear
 		ComfZone.checkZone()
-	if currentGear != "reverse":
-		currentGear = 0
+	if currentSpeed > 5:
+		drive(currentSpeed)
+
 
 def stop():
 	#This method is called when driver has stopped.
@@ -75,6 +80,7 @@ def stop():
 		if valid:
 			print 'How long would you like the lights on(answer in seconds)? '
 			walkMeHome(timeOn)
+		print 'Good bye'
 #run walkMeHome-method
 #get input from a button to determine walkeMeHomeLight's state
 #if RPIO_light_switch == True:
@@ -102,10 +108,6 @@ def main():
 	currentSpeed = 0
 	controll = 1
 
-	#Will always run when the pi is on.
-	#while controll == 1:
-	#	currentGear = "reverse" #Listens to active changes in gear.
-
 	#Speeds from 0 to 50. This is a stupid function, but we don't have OBD-II availability
 	for accelerate in range (0,20):
 	    currentSpeed += 2.5
@@ -116,9 +118,10 @@ def main():
 	if currentSpeed > 10:
 		drive(currentSpeed)
 	#elif gear == "reverse": WE MIGHT HAVE TO DROP THIS, no OBD-II #Reacts only if gear is reverse
-	else:	
-		print 'Parking-mode'
-		park()
+	print 'Parking-mode'
+	park()
+
+	print 'Stop-mode'
 	stop() #Calls the stop-method. Shall we have a parameter with a timeOn delay?
 
 	#This condition checks if the car has stopped. If it has, run the stop-method for walkMeHome

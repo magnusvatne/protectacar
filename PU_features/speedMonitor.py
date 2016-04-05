@@ -15,6 +15,11 @@ def deccellerator(currentSpeed):
     speed = currentSpeed
     return round(speed/2)
 
+
+def getGear():
+    currentGear = 'reverse'
+    return currentGear
+
 #If we had a car and the OBD-II, we could use this to keep up to date with the current speed.
 def OBDgetCurrentSpeed():
    """ Gets the speed of the vehicle """

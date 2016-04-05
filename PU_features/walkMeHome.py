@@ -1,5 +1,5 @@
 import time
-from autobeam import switchBeam
+from autoBeam import switchBeam
 
 def walkMeHome(timeOn):
   #set highbeams on for timeOn-delay
