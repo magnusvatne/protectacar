@@ -1,18 +1,25 @@
 import DistanceSensor
 
+
 class safeDistance:
 
-        carSpeed = 60 #Placeholder until car speed can be extracted
+    # Method called to check if distance to car ahead is acceptable
+    def check_ahead(self):
+        distance = DistanceSensor.safeDistance()
 
-	def checkAhead():
-            distance = DistanceSensor.safeDistance()
-            if (distance < 0)
-                    return False #returns false if sensor is broken
-	    return okDistance(distance,carSpeed) 
+        if distance < 0:
+            return False  # Returns false if sensor is broken
+        return self.ok_distance(distance)
 
-	def okDistance(sensorData, carSpeed):
-            sensorData = sensorData/100 #Divided by 100 to accomodate for the sensor monitoring in cm
-	    carTravelDistance = (carSpeed/3.6)*3 #distance travelled in 3 seconds
-	    if (sensorData < carTravelDistance):
-	        return False
-	    return True
+    # Method used to calculate the relative distance with the 3 second rule
+    def ok_distance(self, sensor_data):
+        sensor_data /= 100  # Divided by 100 to accommodate for the sensor monitoring in cm
+
+        car_speed = 60  # TODO Placeholder until car speed can be extracted
+        car_travel_distance = (car_speed / 3.6) * 3  # Distance travelled in 3 seconds
+
+        if sensor_data < car_travel_distance:
+            return False
+        else:
+            return True
+
