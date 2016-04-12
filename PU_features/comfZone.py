@@ -9,12 +9,11 @@ class ComfZone:
     rear_right_pin = 1
     front_right_pin = 1
 
-    isOn = False  # Whether comfort zone is turned on by user
-
+    isOn = True  # Whether comfort zone is turned on by user
     safe_distance = 8  # Final num to compare with distance from sensor
 
     def check_zone(self):  # Runs in background, will check zones when isOn = true
-        while self.isOn:
+        if self.isOn:
             sensdata_rearleft = DistanceSensor.bak_venstre()
             sensdata_rearright = DistanceSensor.bak_hogre()
             sensdata_frontleft = DistanceSensor.framme_venstre()
