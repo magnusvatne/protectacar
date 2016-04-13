@@ -4,21 +4,24 @@ from collections import deque
 import statistics
 GPIO.setmode(GPIO.BCM)
 
-TRIG_BAK_VENSTRE	 = 4
-TRIG_BAK_HOGRE		 = 20
-TRIG_FRAMME_VENSTRE	 = 16
-TRIG_FRAMME_HOGRE	 = 26
+TRIG_BAK_VENSTRE	 = 26
+TRIG_BAK_HOGRE		 = 16
+TRIG_FRAMME_VENSTRE	 = 20
+TRIG_FRAMME_HOGRE	 = 4
 TRIG_FRAMOVER		 = 5
 
 
-ECHO_BAK_VENSTRE	 = 27 #Connect ECHO to Pin 18 on the Raspberry Pi
-ECHO_BAK_HOGRE		 = 22 #Connect ECHO to Pin 40 on the Raspberry Pi
-ECHO_FRAMME_VENSTRE	 = 23 #Connect ECHO to Pin 37 on the Raspberry Pi
-ECHO_FRAMME_HOGRE	 = 24 #Connect ECHO to Pin 15 on the Raspberry Pi
+ECHO_BAK_VENSTRE	 = 24 #Connect ECHO to Pin 18 on the Raspberry Pi
+ECHO_BAK_HOGRE		 = 23 #Connect ECHO to Pin 40 on the Raspberry Pi
+ECHO_FRAMME_VENSTRE	 = 22 #Connect ECHO to Pin 37 on the Raspberry Pi
+ECHO_FRAMME_HOGRE	 = 27 #Connect ECHO to Pin 15 on the Raspberry Pi
 ECHO_FRAMOVER		 = 6
 
 Lys_Framme_Hogre = 12
-
+Lys_Framme_Venstre =25
+Lys_Bak_Hogre = 19
+Lys_Bak_Venstre = 13
+Lys_Front = 17
 
 print ("Distance Measurement In Progress")
 #Setup av signal
@@ -38,6 +41,18 @@ GPIO.setup(ECHO_FRAMOVER, GPIO.IN)
 GPIO.setup(Lys_Framme_Hogre, GPIO.OUT)
 GPIO.output(Lys_Framme_Hogre, False)
 
+GPIO.setup(Lys_Framme_Venstre, GPIO.OUT)
+GPIO.output(Lys_Framme_Venstre, False)
+
+GPIO.setup(Lys_Bak_Hogre, GPIO.OUT)
+GPIO.output(Lys_Bak_Hogre, False)
+
+GPIO.setup(Lys_Bak_Venstre, GPIO.OUT)
+GPIO.output(Lys_Bak_Venstre, False)
+
+GPIO.setup(Lys_Front, GPIO.OUT)
+GPIO.output(Lys_Front, False)
+
 GPIO.output(TRIG_BAK_VENSTRE, False)
 GPIO.output(TRIG_BAK_HOGRE, False)
 GPIO.output(TRIG_FRAMME_VENSTRE, False)
@@ -50,10 +65,7 @@ avstand3 = deque()
 avstand4 = deque()
 avstand5 = deque()
 
-print ("Done setting up, lets go!")
-
-def blinkingFlashyLight(cm):
-	pass	
+print ("Done setting up, lets go!")	
 
 
 def bak_venstre():
@@ -90,14 +102,19 @@ def bak_venstre():
 			#print (distance, avstand1)
 			i += 1
 			
-			if distance <= 20:
-				GPIO.output(Lys_Framme_Hogre, True)
-				time.sleep(distance*10)
-				GPIO.output(Lys_Framme_Hogre,False)
+			if distance <= 27 and distance > 7:
+				GPIO.output(Lys_Bak_Venstre, True)
+				time.sleep(distance/200)
+				GPIO.output(Lys_Bak_Venstre,False)
+			elif distance <= 7 or distance == -1:
+				GPIO.output(Lys_Bak_Venstre, True)
+			else:
+				GPIO.output(Lys_Bak_Venstre, False)
+
 		return distance
 	except:
 		print("Sensor back left is broken")
-		return -1
+		avstand1.append(1)
 
 def framme_venstre():
 	i = 1
@@ -133,6 +150,15 @@ def framme_venstre():
 	
 	                #print (distance, avstand1)
 			i += 1
+			if distance <= 27.5 and distance >= 7.5:
+				GPIO.output(Lys_Framme_Venstre, True)
+				time.sleep(distance/200)
+				GPIO.output(Lys_Framme_Venstre,False)
+			elif distance <= 7.5 or distance == -1:
+				GPIO.output(Lys_Framme_Venstre, True)
+			else:
+				GPIO.output(Lys_Framme_Venstre, False)
+
 		return distance
 	except:
 		print("Forward left sensor is broken")
@@ -171,6 +197,15 @@ def bak_hogre():
 	
 	                #print (distance, avstand1)
 			i += 1
+			if distance <= 30 and distance > 10:
+				GPIO.output(Lys_Bak_Hogre, True)
+				time.sleep(distance/200)
+				GPIO.output(Lys_Bak_Hogre,False)
+			elif distance <= 10 or distance == -1:
+				GPIO.output(Lys_Bak_Hogre, True)
+			else:
+				GPIO.output(Lys_Bak_Hogre,False)
+			
 		return distance
 	except:
 		print("Sensor back right is broken")
@@ -209,6 +244,15 @@ def framme_hogre():
 	
 	                #print (distance, avstand1)
 			i += 1
+			if distance <= 30 and distance >= 10:
+				GPIO.output(Lys_Framme_Hogre, True)
+				time.sleep(distance/200)
+				GPIO.output(Lys_Framme_Hogre,False)
+			elif distance <= 10 or distance == -1:
+				GPIO.output(Lys_Framme_Hogre, True)
+			else:
+				GPIO.output(Lys_Framme_Hogre, False)
+
 		return distance
 	except:
 		print("Sensor forward right is broken")
@@ -245,6 +289,11 @@ def safeDistance():
 			distance = round(statistics.median(avstand5),2)
 		
 			#print (distance, avstand1)
+			if distance <= 50:
+				GPIO.output(Lys_Front, True)
+			else:
+				GPIO.output(Lys_Front, False)
+
 			return distance
 	except:
 		print("Sensor front is broken")
@@ -252,13 +301,12 @@ def safeDistance():
 
 def main():
 	while(True):
-		time.sleep(1)
-		print(bak_venstre())
-		print(framme_venstre())
-		print(bak_hogre())
-		print(framme_hogre())
-		print(safeDistance())
-		print("")
-		print("-----------------")
-		print("")
+		time.sleep(0.2)
+		(bak_venstre())
+		(framme_venstre())
+		(bak_hogre())
+		(framme_hogre())
+		(safeDistance())
+
+main()
 
