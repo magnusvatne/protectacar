@@ -17,7 +17,7 @@ ECHO_FRAMME_VENSTRE	 = 23 #Connect ECHO to Pin 37 on the Raspberry Pi
 ECHO_FRAMME_HOGRE	 = 24 #Connect ECHO to Pin 15 on the Raspberry Pi
 ECHO_FRAMOVER		 = 6
 
-Lys_Framme_høgre = 12
+Lys_Framme_Hogre = 12
 
 
 print ("Distance Measurement In Progress")
