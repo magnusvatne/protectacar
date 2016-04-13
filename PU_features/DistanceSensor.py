@@ -53,7 +53,7 @@ avstand5 = deque()
 print ("Done setting up, lets go!")
 
 def blinkingFlashyLight(cm):
-	
+	pass	
 
 
 def bak_venstre():
@@ -96,7 +96,7 @@ def bak_venstre():
 				GPIO.output(Lys_Framme_Hogre,False)
 		return distance
 	except:
-		print("Sensor bak venstre er ødelagt")
+		print("Sensor back left is broken")
 		return -1
 
 def framme_venstre():
@@ -135,7 +135,7 @@ def framme_venstre():
 			i += 1
 		return distance
 	except:
-		print("Sensor framme venstre er ødelagt")
+		print("Forward left sensor is broken")
 		return -1
 
 
@@ -173,7 +173,7 @@ def bak_hogre():
 			i += 1
 		return distance
 	except:
-		print("Sensor bak høgre er ødelagt")
+		print("Sensor back right is broken")
 		return -1
 
 
@@ -211,7 +211,7 @@ def framme_hogre():
 			i += 1
 		return distance
 	except:
-		print("Sensor framme høgre er ødelagt")
+		print("Sensor forward right is broken")
 		return -1
 
 def safeDistance():
@@ -247,7 +247,7 @@ def safeDistance():
 			#print (distance, avstand1)
 			return distance
 	except:
-		print("Sensor framover er ødelagt")
+		print("Sensor front is broken")
 		return -1
 
 def main():
@@ -262,4 +262,3 @@ def main():
 		print("-----------------")
 		print("")
 
-main()

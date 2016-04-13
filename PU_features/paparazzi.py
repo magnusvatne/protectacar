@@ -16,7 +16,7 @@ def anothermain():
 
 
 def yetanothermain():
-	print('running yetanothermain')
+	print('running yetanothermain\n')
 	while True:
 		anothermain()
 
@@ -28,5 +28,4 @@ def yetanothermain():
 #		anothermain()
 
 
-yetanothermain()
 	

@@ -32,7 +32,7 @@ class Camera():
 			self.camera.contrast = 100
 			self.camera.hflip = True
 			self.camera.capture(self.stream,format='jpeg')
-			print("Captured a image")
+			#print("Captured a image")
 		self.stream.seek(0)
 		self.image=Image.open(self.stream)
 		self.image.save("image.jpeg",format = 'jpeg')

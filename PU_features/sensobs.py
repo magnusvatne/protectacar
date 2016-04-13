@@ -13,7 +13,7 @@ class RedDetector(Thread):
 		Thread.__init__(self)
 		self.camera = Camera(400,250)
 		self.value = False
-		print("test")
+		#print("test")
 		self.run()
 	
 
@@ -40,7 +40,7 @@ class RedDetector(Thread):
 		return red_pixels
 
 	def run(self):
-		print("trying to capture")
+		#print("trying to capture")
 		self.image = self.camera.update()
             #image = Imager("image.png",self.camera.get_value())
 		pixel = self.is_red(self.image)
