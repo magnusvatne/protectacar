@@ -17,6 +17,8 @@ ECHO_FRAMME_VENSTRE	 = 23 #Connect ECHO to Pin 37 on the Raspberry Pi
 ECHO_FRAMME_HOGRE	 = 24 #Connect ECHO to Pin 15 on the Raspberry Pi
 ECHO_FRAMOVER		 = 6
 
+Lys_Framme_høgre = 12
+
 
 print ("Distance Measurement In Progress")
 #Setup av signal
@@ -33,6 +35,9 @@ GPIO.setup(ECHO_FRAMME_VENSTRE,GPIO.IN)
 GPIO.setup(ECHO_FRAMME_HOGRE,GPIO.IN)
 GPIO.setup(ECHO_FRAMOVER, GPIO.IN)
 
+GPIO.setup(Lys_Framme_Hogre, GPIO.OUT)
+GPIO.output(Lys_Framme_Hogre, False)
+
 GPIO.output(TRIG_BAK_VENSTRE, False)
 GPIO.output(TRIG_BAK_HOGRE, False)
 GPIO.output(TRIG_FRAMME_VENSTRE, False)
@@ -46,6 +51,10 @@ avstand4 = deque()
 avstand5 = deque()
 
 print ("Done setting up, lets go!")
+
+def blinkingFlashyLight(cm):
+	
+
 
 def bak_venstre():
 	i = 1
@@ -80,9 +89,14 @@ def bak_venstre():
 	
 			#print (distance, avstand1)
 			i += 1
+			
+			if distance <= 20:
+				GPIO.output(Lys_Framme_Hogre, True)
+				time.sleep(distance*10)
+				GPIO.output(Lys_Framme_Hogre,False)
 		return distance
 	except:
-		print("Sensor back-left is broken")
+		print("Sensor bak venstre er ødelagt")
 		return -1
 
 def framme_venstre():
@@ -121,7 +135,7 @@ def framme_venstre():
 			i += 1
 		return distance
 	except:
-		print("Sensor front left i broken")
+		print("Sensor framme venstre er ødelagt")
 		return -1
 
 
@@ -159,7 +173,7 @@ def bak_hogre():
 			i += 1
 		return distance
 	except:
-		print("Sensor back right is broken")
+		print("Sensor bak høgre er ødelagt")
 		return -1
 
 
@@ -197,7 +211,7 @@ def framme_hogre():
 			i += 1
 		return distance
 	except:
-		print("Sensor front right is broken")
+		print("Sensor framme høgre er ødelagt")
 		return -1
 
 def safeDistance():
@@ -233,7 +247,7 @@ def safeDistance():
 			#print (distance, avstand1)
 			return distance
 	except:
-		print("Front sensor is broken")
+		print("Sensor framover er ødelagt")
 		return -1
 
 def main():
