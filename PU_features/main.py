@@ -3,15 +3,18 @@
 import time
 import sys
 #import comfZone.py
-from walkMeHome import walkMeHome
-from autobeam import autoMain
+#from walkMeHome import walkMeHome
+#from autobeam import autoMain
 #import overtake.py
 #import safeDistance.py
+import threading
+
 from speedMonitor import changeCurrentSpeed
 from speedMonitor import deccellerator
 from speedMonitor import getGear
-from overtake import checkOvertake
+#from overtake import checkOvertake
 from safeDistance import okDistance
+from paparazzi import yetanothermain
 
 
 def drive(currentSpeed):
@@ -19,6 +22,8 @@ def drive(currentSpeed):
 #Running for-loop monitoring speed and distances to cars ahead
 #Keep updated with external methods monitoring safeDistance() + overtake()
 #Hard-coded deccelerating lets car change state
+	thread = threading.Thread(group=None, target=yetanothermain, name=None)
+	thread.start()
 	for maintain in range(0,10):
 		checkOvertake()
 		currentSpeed = changeCurrentSpeed(currentSpeed)

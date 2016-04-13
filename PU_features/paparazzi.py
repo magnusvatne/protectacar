@@ -16,6 +16,7 @@ def anothermain():
 
 
 def yetanothermain():
+	print('running yetanothermain')
 	while True:
 		anothermain()
 

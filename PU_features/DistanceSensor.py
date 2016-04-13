@@ -82,7 +82,7 @@ def bak_venstre():
 			i += 1
 		return distance
 	except:
-		print("Sensor bak venstre er ødelagt")
+		print("Sensor back-left is broken")
 		return -1
 
 def framme_venstre():
@@ -121,7 +121,7 @@ def framme_venstre():
 			i += 1
 		return distance
 	except:
-		print("Sensor framme venstre er ødelagt")
+		print("Sensor front left i broken")
 		return -1
 
 
@@ -159,7 +159,7 @@ def bak_hogre():
 			i += 1
 		return distance
 	except:
-		print("Sensor bak høgre er ødelagt")
+		print("Sensor back right is broken")
 		return -1
 
 
@@ -197,7 +197,7 @@ def framme_hogre():
 			i += 1
 		return distance
 	except:
-		print("Sensor framme høgre er ødelagt")
+		print("Sensor front right is broken")
 		return -1
 
 def safeDistance():
@@ -233,7 +233,7 @@ def safeDistance():
 			#print (distance, avstand1)
 			return distance
 	except:
-		print("Sensor framover er ødelagt")
+		print("Front sensor is broken")
 		return -1
 
 def main():
