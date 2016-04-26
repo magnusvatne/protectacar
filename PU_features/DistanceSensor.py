@@ -159,6 +159,7 @@ def framme_venstre():
 			else:
 				GPIO.output(Lys_Framme_Venstre, False)
 
+		print (distance)
 		return distance
 	except:
 		print("Forward left sensor is broken")
@@ -284,7 +285,7 @@ def safeDistance():
 			distance = round(distance,2)
 			
 			avstand5.append(distance)
-			if len(avstand5) >= 20:
+			if len(avstand5) >= 10:
 				avstand5.popleft()
 			distance = round(statistics.median(avstand5),2)
 		

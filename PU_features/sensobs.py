@@ -13,7 +13,7 @@ class RedDetector(Thread):
 		Thread.__init__(self)
 		self.camera = Camera(400,250)
 		self.value = False
-		#print("test")
+		print("test")
 		self.run()
 	
 

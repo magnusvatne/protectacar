@@ -27,5 +27,6 @@ def yetanothermain():
 #	while True:
 #		anothermain()
 
+yetanothermain()
 
 	
